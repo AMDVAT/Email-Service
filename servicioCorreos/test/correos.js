@@ -28,7 +28,17 @@ describe('Validar Autenticacion de usuario', function () {
     it('Enviar mensaje correcto', (done) => {
         chai.request('http://localhost:3000')
             .post('/')
-            .send(dataEmail)
+            .send(dataEmailCorrect)
+            .end(function (err, res) {
+                //console.log(res)
+                expect(res).to.have.status(200);
+                done();
+            });
+    });
+    it('No se pudo enviar el mensjae', (done) => {
+        chai.request('http://localhost:3000')
+            .post('/')
+            .send(dataEmailIncorrect)
             .end(function (err, res) {
                 //console.log(res)
                 expect(res).to.have.status(200);
